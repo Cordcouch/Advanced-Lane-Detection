@@ -19,7 +19,7 @@ Output result are stored inside the folders `output_images` and `output_videos`.
 7. Project the lane detection back onto the original image
 8. Create a single image or video stream output with lane detection, lane curvature and vehicle offset drawn on it
 
----
+
 
 
 
@@ -48,15 +48,15 @@ Code can be found inside  notebook cells #2 and #3
 
 Original chessboard image             | Undistorted chessboard image 
 :-------------------------:|:-------------------------:
-<img src="camera_cal/calibration1.jpg" style="zoom:20%;" />  | <img src="output_images/1_undistorted/calibration1.jpg" style="zoom:20%;" /> 
+<img src="camera_cal/calibration1.jpg" style="size:20%;" />  | <img src="output_images/1_undistorted/calibration1.jpg" style="size:20%;" /> 
 
 |Undistorted road image             |
 |:-------------------------:|
-|<img src="output_images/1_undistorted/test1.jpg" style="zoom:40%;" />  |
+|<img src="output_images/1_undistorted/test1.jpg" style="size:30%;" />  |
 
 
 
----
+
 
 ### Threshold Binary Image
 
@@ -78,11 +78,11 @@ The result is shown below from left to right:
 - Color gradient and directional gradient stacked on top of each other
 - Thresholded, binary image
 
-<img src="output_images/binaries_combined.png" style="zoom:100%;" />
+<img src="output_images/binaries_combined.png" style="zoom:30%;" />
 
 
 
----
+
 
 ### Perspective Transform
 
@@ -100,11 +100,11 @@ Code can be found inside function `warp()` in notebook cell #10
 
 | Original image with source points                            | Perspective transformed image                                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| <img src="output_images/area_of_interest.png" style="zoom:49%;" /> | <img src="output_images/perspective_transform.png" style="zoom:49%;" /> |
+| <img src="output_images/area_of_interest.png" style="zoom:30%;" /> | <img src="output_images/perspective_transform.png" style="zoom:30%;" /> |
 
 
 
----
+
 
 ### Lane Pixel Detection
 
@@ -126,21 +126,21 @@ Code can be found in function `search_around_poly()` in notebook cell 20.
 
 
 
----
+
 
 ### Lane Curvature and Vehicle Offset
 
 Given the lane line equation
 
- $f(y) = Ay^2 + By + C$ 
+<img src="http://www.sciweavers.org/tex2img.php?eq=f%28y%29%20%3D%20Ay%5E2%20%2B%20By%20%2B%20C&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f(y) = Ay^2 + By + C" width="165" height="22" />
 
 and the equation for curvature radius 
 
-$\bold {R_{curve} = \frac{[1+(\frac{dx}{dy})^{3/2}]}{|\frac{d^2x}{dy2}|}}$, 
+<img src="http://www.sciweavers.org/tex2img.php?eq=R_%7Bcurve%7D%20%3D%20%5Cfrac%7B%5B1%2B%28%5Cfrac%7Bdx%7D%7Bdy%7D%29%5E%7B3%2F2%7D%5D%7D%7B%7C%5Cfrac%7Bd%5E2x%7D%7Bdy2%7D%7C%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="R_{curve} = \frac{[1+(\frac{dx}{dy})^{3/2}]}{|\frac{d^2x}{dy2}|}" width="182" height="64" /> 
 
 the lane line radius can be calculated with the  formula
 
-$\bold {R_{curve} = \frac{(1+(2Ay+B)^2)^{3/2}}{|2A|}}$
+<img src="http://www.sciweavers.org/tex2img.php?eq=R_%7Bcurve%7D%20%3D%20%5Cfrac%7B%281%2B%282Ay%2BB%29%5E2%29%5E%7B3%2F2%7D%7D%7B%7C2A%7C%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="R_{curve} = \frac{(1+(2Ay+B)^2)^{3/2}}{|2A|}" width="233" height="49" />
 
 
 
@@ -166,7 +166,7 @@ Code can be found inside functions `measure_curvature_real()` and `measure_offse
 
 
 
----
+
 
 ### Draw projection on the image
 
@@ -180,7 +180,7 @@ Code can be found in the notebook cell 16
 </p>
 
 
----
+
 
 ### Video stream
 
@@ -208,13 +208,13 @@ Class instances and objects are initiated in notebook cells 22 and 23.
 
 **Processed video** --> `/output_videos/project_video.mp4`
 
----
+
 
 
 
 **Disclaimer**
 
-- The pipeline is not suited for real-time applications and currently runs at approx. 5 frames / second.
+- The pipeline is not suited for real-time applications and currently runs at approx. 5-6 frames / second.
 - The pipeline assumes a good lane detection on the first frame. Starting with the second frame the algorithm starts searching for lane lines based on the lane line detection from the previous frame. Another possibility would have been to decide on the lane searching method based on the quality of the lane detection of the current frame. However I found the first method to work more reliable.
 - Also this pipeline is likely to fail on sharp turns (lane lines cutting to the right-hand or left-hand edge of the screen)
 
@@ -227,9 +227,3 @@ Generally the perspective transform approach is often very specific to the camer
 - A deep learning approach could be used to identify the lane lines (briefly described in this article [Lane Detection with Deep Learning]( https://towardsdatascience.com/lane-detection-with-deep-learning-part-1-9e096f3320b7 ) )
 - Terminate the lane pixel search if the search window touches one of the image edges.
 - Implement techniques to determine the quality of the lane detection in the current frame. If the detection in the current frame is not good enough, the search in the next frame is based on this  result. This eventually adds up to bad overall results or lane lines not being detected at all anymore. As an example check the algorithm applied to video `challenge_video.mp4`. 
-
-
-
-**Overall conclusion**
-
-This algorithm
