@@ -119,16 +119,15 @@ Code can be found in function `search_around_poly()` in notebook cell 20.
 
 Given the lane line equation
 
-![equation](http://bit.ly/37WtyGx)
+<img src="https://latex.codecogs.com/gif.latex?f(y)&space;=&space;Ay^2&space;&plus;&space;By&space;&plus;&space;C" title="f(y) = Ay^2 + By + C" />
 
 and the equation for curvature radius 
 
-
-![equation](http://bit.ly/2uZRAC5)
+<img src="https://latex.codecogs.com/gif.latex?R_{curve}&space;=&space;\frac{[1&plus;(\frac{dx}{dy})^{3/2}]}{|\frac{d^2x}{dy2}|}" title="R_{curve} = \frac{[1+(\frac{dx}{dy})^{3/2}]}{|\frac{d^2x}{dy2}|}" />
 
 the lane line radius can be calculated with the  formula
 
-![equation](http://bit.ly/3b8m2KM)
+<img src="https://latex.codecogs.com/gif.latex?R_{curve}&space;=&space;\frac{(1&plus;(2Ay&plus;B)^2)^{3/2}}{|2A|}" title="R_{curve} = \frac{(1+(2Ay+B)^2)^{3/2}}{|2A|}" />
 
 
 Before calculation, the polynomial values are first converted from pixel space to meters with the following ratios
