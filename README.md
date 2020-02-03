@@ -7,8 +7,7 @@ The pipeline is tested on the images inside the folder `test_images` and the vid
 Output result are stored inside the folders `output_images` and `output_videos`.
 
 
-
-**The following steps are been taken to detect the lane lines**
+**The following steps are taken to detect the lane lines**
 
 1. Camera Calibration
 2. Apply distortion correction to actual images / video stream
@@ -18,8 +17,6 @@ Output result are stored inside the folders `output_images` and `output_videos`.
 6. Determine lane curvature and vehicle offset in respect to lane center
 7. Project the lane detection back onto the original image
 8. Create a single image or video stream output with lane detection, lane curvature and vehicle offset drawn on it
-
-
 
 
 
@@ -45,7 +42,6 @@ Using the distortion coefficients we can now undistort any given image (taken by
 Code can be found inside  notebook cells #2 and #3
 
 
-
 Original chessboard image             | Undistorted chessboard image 
 :-------------------------:|:-------------------------:
 <img src="camera_cal/calibration1.jpg" style="size:20%;" />  | <img src="output_images/1_undistorted/calibration1.jpg" style="size:20%;" /> 
@@ -53,8 +49,6 @@ Original chessboard image             | Undistorted chessboard image
 |Undistorted road image             |
 |:-------------------------:|
 |<img src="output_images/1_undistorted/test1.jpg" style="size:30%;" />  |
-
-
 
 
 
@@ -82,8 +76,6 @@ The result is shown below from left to right:
 
 
 
-
-
 ### Perspective Transform
 
 In order to detect the lane line pixels, the binary image was transformed into a birds-eye view (view form above).
@@ -101,8 +93,6 @@ Code can be found inside function `warp()` in notebook cell #10
 | Original image with source points                            | Perspective transformed image                                |
 | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | <img src="output_images/area_of_interest.png" style="zoom:30%;" /> | <img src="output_images/perspective_transform.png" style="zoom:30%;" /> |
-
-
 
 
 
@@ -125,23 +115,20 @@ After a line has been detected in the first frame of the video via histogram and
 Code can be found in function `search_around_poly()` in notebook cell 20.
 
 
-
-
-
 ### Lane Curvature and Vehicle Offset
 
 Given the lane line equation
 
-<img src="http://www.sciweavers.org/tex2img.php?eq=f%28y%29%20%3D%20Ay%5E2%20%2B%20By%20%2B%20C&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="f(y) = Ay^2 + By + C" width="165" height="22" />
+![equation](http://bit.ly/37WtyGx)
 
 and the equation for curvature radius 
 
-<img src="http://www.sciweavers.org/tex2img.php?eq=R_%7Bcurve%7D%20%3D%20%5Cfrac%7B%5B1%2B%28%5Cfrac%7Bdx%7D%7Bdy%7D%29%5E%7B3%2F2%7D%5D%7D%7B%7C%5Cfrac%7Bd%5E2x%7D%7Bdy2%7D%7C%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="R_{curve} = \frac{[1+(\frac{dx}{dy})^{3/2}]}{|\frac{d^2x}{dy2}|}" width="182" height="64" /> 
+
+![equation](http://bit.ly/2uZRAC5)
 
 the lane line radius can be calculated with the  formula
 
-<img src="http://www.sciweavers.org/tex2img.php?eq=R_%7Bcurve%7D%20%3D%20%5Cfrac%7B%281%2B%282Ay%2BB%29%5E2%29%5E%7B3%2F2%7D%7D%7B%7C2A%7C%7D&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt="R_{curve} = \frac{(1+(2Ay+B)^2)^{3/2}}{|2A|}" width="233" height="49" />
-
+![equation](http://bit.ly/3b8m2KM)
 
 
 Before calculation, the polynomial values are first converted from pixel space to meters with the following ratios
